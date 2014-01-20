@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password])
 			sign_in user
-			redirect_to user
+			redirect_back_or user #use friendly forwarding, method in app/helpers/sessions_helper
 		else
 			# create error
 			flash.now[:error] = "Invalid email/password combination."
